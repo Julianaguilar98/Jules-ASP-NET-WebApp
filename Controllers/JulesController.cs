@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JulesWebApp.Data;
 using JulesWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JulesWebApp.Controllers
 {
@@ -55,6 +56,7 @@ namespace JulesWebApp.Controllers
         }
 
         // GET: Jules/Create
+        [Authorize] 
         public IActionResult Create()
         {
             return View();
@@ -63,6 +65,7 @@ namespace JulesWebApp.Controllers
         // POST: Jules/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,JulesQuestion,JulesAnswer")] Jules jules)
@@ -77,6 +80,7 @@ namespace JulesWebApp.Controllers
         }
 
         // GET: Jules/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,6 +99,7 @@ namespace JulesWebApp.Controllers
         // POST: Jules/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,JulesQuestion,JulesAnswer")] Jules jules)
@@ -128,6 +133,7 @@ namespace JulesWebApp.Controllers
         }
 
         // GET: Jules/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -148,6 +154,7 @@ namespace JulesWebApp.Controllers
         // POST: Jules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var jules = await _context.Jules.FindAsync(id);
