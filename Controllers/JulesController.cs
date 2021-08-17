@@ -25,6 +25,17 @@ namespace JulesWebApp.Controllers
             return View(await _context.Jules.ToListAsync());
         }
 
+        // GET: Jules/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+        // POST: Jokes/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
+        {
+            return View("Index", await _context.Jules.Where( j => j.JulesQuestion.Contains(SearchPhrase)).ToListAsync());
+        }
+
         // GET: Jules/Details/5
         public async Task<IActionResult> Details(int? id)
         {
